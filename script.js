@@ -610,7 +610,7 @@ function buildAmapSearchUrl(name, city = "") {
   return `https://uri.amap.com/search?${params.toString()}`;
 }
 
-function buildAmapNavigationUrl(name, city = "") {
+function buildAmapWebNavigationUrl(name, city = "") {
   const placeMeta = getPlaceMeta(name, city);
 
   if (!placeMeta?.location || placeMeta.mode === "search") {
@@ -626,6 +626,33 @@ function buildAmapNavigationUrl(name, city = "") {
   });
 
   return `https://uri.amap.com/navigation?${params.toString()}`;
+}
+
+function buildAmapAppNavigationUrl(name, city = "") {
+  const placeMeta = getPlaceMeta(name, city);
+
+  if (!placeMeta?.location || placeMeta.mode === "search") {
+    return buildAmapAppSearchUrl(name, city);
+  }
+
+  const baseParams = {
+    sourceApplication: "huadong13",
+    poiname: placeMeta.label ?? name,
+    lat: String(placeMeta.location[1]),
+    lon: String(placeMeta.location[0]),
+    dev: "0",
+    style: "4",
+  };
+
+  if (isIOSDevice()) {
+    return `iosamap://navi?${new URLSearchParams(baseParams).toString()}`;
+  }
+
+  if (isAndroidDevice()) {
+    return `androidamap://navi?${new URLSearchParams(baseParams).toString()}`;
+  }
+
+  return buildAmapWebNavigationUrl(name, city);
 }
 
 function buildAmapAppSearchUrl(name, city = "") {
@@ -655,10 +682,12 @@ function buildAmapUrls(name, city = "") {
   const placeMeta = getPlaceMeta(name, city);
 
   if (placeMeta?.location && placeMeta.mode !== "search") {
-    const navUrl = buildAmapNavigationUrl(name, city);
+    const webUrl = buildAmapWebNavigationUrl(name, city);
+    const appUrl = buildAmapAppNavigationUrl(name, city);
+
     return {
-      webUrl: navUrl,
-      appUrl: navUrl,
+      webUrl,
+      appUrl,
       mode: "navigation",
     };
   }
