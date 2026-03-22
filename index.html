@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>华东13日游</title>
+    <meta
+      name="description"
+      content="华东13日游行程、时间轴与酒店信息。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="ambient ambient-a"></div>
+      <div class="ambient ambient-b"></div>
+      <div class="grain"></div>
+
+      <div class="top-switcher">
+        <nav class="section-nav" aria-label="页面导航" role="tablist">
+          <button
+            class="nav-pill active"
+            id="tab-overview"
+            data-view="overview"
+            role="tab"
+            aria-selected="true"
+            aria-controls="view-overview"
+          >
+            总览首页
+          </button>
+          <button
+            class="nav-pill"
+            id="tab-timeline"
+            data-view="timeline"
+            role="tab"
+            aria-selected="false"
+            aria-controls="view-timeline"
+          >
+            行程时间轴
+          </button>
+          <button
+            class="nav-pill"
+            id="tab-hotels"
+            data-view="hotels"
+            role="tab"
+            aria-selected="false"
+            aria-controls="view-hotels"
+          >
+            酒店中心
+          </button>
+        </nav>
+      </div>
+
+      <main class="content">
+        <section
+          class="view-panel active"
+          id="view-overview"
+          data-view="overview"
+          role="tabpanel"
+          aria-labelledby="tab-overview"
+        >
+          <header class="hero">
+            <div class="hero-copy">
+              <p class="hero-kicker">2026.03.23-2026.04.04</p>
+              <h1>华东13日游</h1>
+            </div>
+
+            <div class="hero-grid">
+              <section class="spotlight-card" id="statusCard"></section>
+              <section class="route-card">
+                <div class="section-heading">
+                  <span>线路走向</span>
+                  <strong>南京 → 无锡 → 苏州 → 乌镇 → 杭州</strong>
+                </div>
+                <div class="route-track" id="routeTrack"></div>
+              </section>
+            </div>
+          </header>
+
+          <section class="panel" id="panel-overview">
+            <div class="panel-head">
+              <div><h2>总览首页</h2></div>
+            </div>
+
+            <div class="metric-grid" id="metricGrid"></div>
+
+            <div class="overview-grid">
+              <article class="detail-card focus-card" id="focusCard"></article>
+              <div class="side-stack">
+                <article class="detail-card checklist-card" id="checklistCard"></article>
+                <article class="detail-card relay-card" id="relayCard"></article>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section
+          class="view-panel"
+          id="view-timeline"
+          data-view="timeline"
+          role="tabpanel"
+          aria-labelledby="tab-timeline"
+          hidden
+        >
+          <section class="panel" id="panel-timeline">
+            <div class="panel-head">
+              <div><h2>行程时间轴</h2></div>
+            </div>
+
+            <div class="timeline-list" id="timelineList"></div>
+          </section>
+        </section>
+
+        <section
+          class="view-panel"
+          id="view-hotels"
+          data-view="hotels"
+          role="tabpanel"
+          aria-labelledby="tab-hotels"
+          hidden
+        >
+          <section class="panel" id="panel-hotels">
+            <div class="panel-head">
+              <div><h2>酒店中心</h2></div>
+            </div>
+
+            <div class="hotel-grid" id="hotelGrid"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
